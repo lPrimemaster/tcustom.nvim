@@ -193,7 +193,8 @@ vim.keymap.set('n', '<leader>ff', require('fzf-lua').files, { desc = 'Find Files
 vim.keymap.set('n', '<leader>fw', require('fzf-lua').live_grep , { desc = 'Find Words' })
 vim.keymap.set('n', '<leader>fz', require('fzf-lua').lgrep_curbuf , { desc = 'Find Buffer' })
 vim.keymap.set('n', '<leader>fr', require('fzf-lua').lsp_references, { desc = 'Find References' })
-vim.keymap.set('n', '<leader>fs', require('fzf-lua').lsp_document_symbols, { desc = 'Find Symbols' })
+vim.keymap.set('n', '<leader>fs', require('fzf-lua').lsp_document_symbols, { desc = 'Find Document Symbols' })
+vim.keymap.set('n', '<leader>fa', require('fzf-lua').lsp_live_workspace_symbols, { desc = 'Find All Symbols'})
 vim.keymap.set('n', '<leader>fd', require('fzf-lua').diagnostics_document, { desc = 'Document Diagnostics' })
 vim.keymap.set('n', '<leader>ft', '<cmd>Trouble todo<CR><cmd>sleep 100m<CR><C-w><C-w>', { desc = 'Find Todo' })
 
