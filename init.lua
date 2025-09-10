@@ -177,15 +177,7 @@ require("mason").setup()
 
 require("mini.completion").setup()
 -- require("coq").setup()
-require("mason-lspconfig").setup_handlers {
-    -- The first entry (without a key) will be the default handler
-	-- and will be called for each installed server that doesn't have
-	-- a dedicated handler.
-	function (server_name) -- default handler (optional)
-		-- require("lspconfig")[server_name].setup(require('coq').lsp_ensure_capabilities({}))
-		require("lspconfig")[server_name].setup({})
-	end,
-}
+require("mason-lspconfig").setup {}
 
 -- Config fzf and keybinds
 require("fzf-lua").setup({'fzf-native'})
