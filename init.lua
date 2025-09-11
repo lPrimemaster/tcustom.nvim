@@ -180,7 +180,16 @@ require("mini.completion").setup()
 require("mason-lspconfig").setup {}
 
 -- Config fzf and keybinds
-require("fzf-lua").setup({'fzf-native'})
+require("fzf-lua").setup({
+	{'fzf-native'},
+	-- files = {
+	-- 	prompt 			  = 'Files> ',
+	-- 	find_opts         = [[-type f \! -path '*/.git/*']],
+	-- 	rg_opts           = [[--color=never --hidden --files -g "!.git"]],
+	-- 	fd_opts           = [[--color=never --hidden --type f --type l --exclude .git]],
+	-- 	dir_opts          = [[/s/b/a:-d]],
+	-- }
+})
 vim.keymap.set('n', '<leader>ff', require('fzf-lua').files, { desc = 'Find Files' })
 vim.keymap.set('n', '<leader>fw', require('fzf-lua').live_grep , { desc = 'Find Words' })
 vim.keymap.set('n', '<leader>fz', require('fzf-lua').lgrep_curbuf , { desc = 'Find Buffer' })
