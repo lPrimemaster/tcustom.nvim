@@ -164,6 +164,15 @@ require('lualine').setup({
 	sections = {
 		lualine_c = {
 			{ git_blame.get_current_blame_text, cond = git_blame.is_blame_text_available }
+		},
+		lualine_x = {
+			'filename', 'filetype'
+		},
+		lualine_y = {
+			'lsp_status'
+		},
+		lualine_z = {
+			'location'
 		}
 	}
 })
