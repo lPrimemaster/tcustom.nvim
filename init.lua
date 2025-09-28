@@ -156,6 +156,15 @@ lazy.setup({
 
 	-- Float term for lazygit
 	{ "voldikss/vim-floaterm" },
+
+	-- Vimtex extension for latex editing
+	{
+		"lervag/vimtex",
+		lazy = false,
+		init = function()
+			vim.g.vimtex_view_method = "zathura"
+		end
+	},
 })
 
 local git_blame = require('gitblame')
