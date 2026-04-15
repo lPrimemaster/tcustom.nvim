@@ -72,11 +72,36 @@ lazy.setup({
 	{"echasnovski/mini.completion", version = '*'},
 	{"neovim/nvim-lspconfig"},
 
+	-- DAP
+	{"mfussenegger/nvim-dap"},
+	{"williamboman/mason-nvim-dap.nvim"},
+	{"rcarriga/nvim-dap-ui", dependencies = {"mfussenegger/nvim-dap", "nvim-neotest/nvim-nio"}},
+
 	-- Fzf search
 	{"ibhagwan/fzf-lua", dependencies = { "nvim-tree/nvim-web-devicons" }},
 
 	-- Tree-sitter
-	{"nvim-treesitter/nvim-treesitter", build = ":TSUpdate"},
+	{
+		"nvim-treesitter/nvim-treesitter",
+		lazy = false,
+		build = ":TSUpdate",
+		config = function()
+			-- Config tree-sitter
+			require("nvim-treesitter").setup({
+				-- ensure_installed = {
+				-- 	"lua",
+				-- 	"c",
+				-- 	"cpp",
+				-- 	"cmake",
+				-- 	"fortran",
+				-- 	"python",
+				-- 	"gitignore",
+				-- },
+				highlight = { enable = true },
+				indent = { enable = true },
+			})
+		end
+	},
 
 	-- Comments highlighter
 	{"folke/todo-comments.nvim", dependencies = { "nvim-lua/plenary.nvim" }},
@@ -217,21 +242,6 @@ vim.keymap.set('n', '<leader>fa', require('fzf-lua').lsp_live_workspace_symbols,
 vim.keymap.set('n', '<leader>fd', require('fzf-lua').diagnostics_document, { desc = 'Document Diagnostics' })
 vim.keymap.set('n', '<leader>ft', '<cmd>Trouble todo<CR><cmd>sleep 100m<CR><C-w><C-w>', { desc = 'Find Todo' })
 
--- Config tree-sitter
-require("nvim-treesitter.configs").setup({
-	ensure_installed = {
-		"lua",
-		"c",
-		"cpp",
-		"cmake",
-		"fortran",
-		"python",
-		"gitignore",
-	},
-	highlight = { enable = true },
-	indent = { enable = true },
-})
-
 -- Setup TODO comments
 require('todo-comments').setup()
 
@@ -307,3 +317,15 @@ if vim.fn.executable('lazygit') == 1 then
 
 	vim.keymap.set('n', '<leader>lg', '<cmd>FloatermNew --height=0.8 --width=0.8 --wintype=float --title=LazyGit --autoclose=2 lazygit<cr>', { desc = 'Open Lazygit' })
 end
+
+-- Setup DAP
+require("mason-nvim-dap").setup({
+	ensure_installed = { "cppdbg" },
+	automatic_installation = true,
+	handlers = {
+		function(config)
+			require("mason-nvim-dap").default_setup(config)
+		end
+	}
+})
+require("dapui").setup()
